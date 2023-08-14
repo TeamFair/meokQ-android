@@ -1,4 +1,4 @@
-package com.meokq.ui.theme
+package com.meokq.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

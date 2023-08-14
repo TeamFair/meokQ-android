@@ -1,4 +1,4 @@
-package com.meokq.ui.theme
+package com.meokq.presentation.theme
 
 import android.app.Activity
 import android.os.Build
