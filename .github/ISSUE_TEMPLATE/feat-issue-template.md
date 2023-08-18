@@ -2,7 +2,7 @@
 name: Feat Issue Template
 about: Feature 기능 개발 Issue Template입니다
 title: "[ Feat ]"
-labels: ''
+labels: "\U0001F5A5️feat"
 assignees: ''
 
 ---

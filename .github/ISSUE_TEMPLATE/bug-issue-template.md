@@ -2,7 +2,7 @@
 name: Bug Issue Template
 about: 트러블슈팅및 버그 리포트 Issue에서 사용하는 양식입니다
 title: ''
-labels: bug
+labels: ''
 assignees: gomsang, kimwest00
 
 ---
