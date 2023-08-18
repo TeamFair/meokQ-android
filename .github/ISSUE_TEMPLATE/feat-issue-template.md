@@ -3,7 +3,7 @@ name: Feat Issue Template
 about: Feature 기능 개발 Issue Template입니다
 title: "[Feat]"
 labels: ''
-assignees: gomsang, kimwest00
+assignees: ''
 
 ---
 
