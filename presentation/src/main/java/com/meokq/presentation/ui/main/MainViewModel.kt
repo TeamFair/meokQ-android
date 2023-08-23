@@ -14,6 +14,7 @@ class MainViewModel @Inject constructor(getCurrentUserIdUseCase: GetCurrentUserI
     lateinit var test : String
 
     init {
-        test = getCurrentUserIdUseCase()
+        test = getCurrentUserIdUseCase("")
+        getCurrentUserIdUseCase.abc("")
     }
 }
