@@ -10,11 +10,4 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(getCurrentUserIdUseCase: GetCurrentUserIdUseCase) :
     BaseViewModel() {
-
-    lateinit var test : String
-
-    init {
-        test = getCurrentUserIdUseCase("")
-        getCurrentUserIdUseCase.abc("")
-    }
 }
