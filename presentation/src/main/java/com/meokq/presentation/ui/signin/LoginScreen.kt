@@ -2,7 +2,7 @@ package com.meokq.presentation.ui.signin
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +30,56 @@ import com.meokq.presentation.getResourceId
 import com.meokq.presentation.theme.KakaoLoginButton
 import com.meokq.presentation.theme.MainPrimary
 import com.meokq.presentation.theme.White
+
+@Preview
+@Composable
+fun LoginScreen(
+    onNavigate: () -> Unit={},
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .fillMaxWidth()
+            .background(color = White),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+
+    ) {
+        Image(
+            modifier= Modifier
+                .width(150.dp)
+                .height(150.dp)
+                .clickable (
+                    //임시 navigate 연결
+                   onClick = onNavigate
+                ),
+            painter = painterResource(
+                R.drawable.iv_logo_150
+            ),
+            contentDescription = "login logo",
+
+        )
+        Text(
+            text = stringResource(R.string.application_name), style = TextStyle(
+                fontSize = 50.sp,
+                color = MainPrimary,
+                fontWeight = FontWeight.Bold
+            )
+        )
+        Spacer(modifier = Modifier.height(150.dp))
+        LoginButton(
+            img = "kakao",
+            backgroundColor = KakaoLoginButton
+        )
+        Spacer(modifier = Modifier.height(27.dp))
+        LoginButton(
+            img = "google",
+            backgroundColor = White
+        )
+    }
+}
+
+
 
 @Composable
 fun LoginButton(
@@ -60,48 +110,3 @@ fun LoginButton(
         )
     }
 }
-
-@Preview
-@Composable
-fun LoginScreen(
-
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxHeight()
-            .fillMaxWidth()
-            .background(color = White),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-
-    ) {
-        Image(
-            modifier= Modifier
-                .width(150.dp)
-                .height(150.dp),
-            painter = painterResource(
-                R.drawable.iv_logo_150
-            ),
-
-            contentDescription = "login logo"
-        )
-        Text(
-            text = stringResource(R.string.application_name), style = TextStyle(
-                fontSize = 50.sp,
-                color = MainPrimary,
-                fontWeight = FontWeight.Bold
-            )
-        )
-        Spacer(modifier = Modifier.height(150.dp))
-        LoginButton(
-            img = "kakao",
-            backgroundColor = KakaoLoginButton
-        )
-        Spacer(modifier = Modifier.height(27.dp))
-        LoginButton(
-            img = "google",
-            backgroundColor = White
-        )
-    }
-}
-   
