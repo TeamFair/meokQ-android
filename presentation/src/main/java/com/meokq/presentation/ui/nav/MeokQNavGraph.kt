@@ -19,3 +19,22 @@ fun MainNavHost(navController : NavHostController = rememberNavController()) {
         }
     }
 }
+
+//@Composable
+//fun LoginNavHost(navController: NavHostController = rememberNavController()) {
+//    NavHost(
+//        navController = navController,
+//        startDestination = MeokQDestination.LOGIN
+//    ) {
+//        composable(MeokQDestination.QUEST_ROUTE) {
+//            MainNavHost(navController = navController)
+//        }
+//        composable(MeokQDestination.LOGIN) {
+//            LoginScreen(
+//                onNavigate={
+//                    navController.navigate(MeokQDestination.QUEST_ROUTE)
+//                }
+//            )
+//        }
+//    }
+//}
