@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">맛Q</string>
+    <string name="text_button_sign_in_kakao">Login with Kakao</string>
+    <string name="text_button_sign_in_google">Sign with Google</string>
 </resources>
