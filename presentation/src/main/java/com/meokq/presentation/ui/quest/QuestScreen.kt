@@ -1,6 +1,7 @@
 package com.meokq.presentation.ui.quest
 
 import CustomTypo
+import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -38,9 +40,53 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .fillMaxHeight()
             .background(color = MainBackground)
     ) {
-        //TODO : AppHeader
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    color = MainPrimary,
+                    shape = RoundedCornerShape(bottomStart = 30.dp, bottomEnd = 30.dp)
+                )
+                .padding(vertical = 36.dp, horizontal = 30.dp)
+        ) {
+            val (title, arrow, setting) = createRefs()
+            Text(
+                modifier = Modifier.constrainAs(title) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+
+                }, text = "서울 강남구", style = CustomTypo.titleSmall.copy(
+                    fontWeight = FontWeight(600)
+                )
+            )
+            Image(
+                modifier = Modifier
+                    .padding(start = 5.dp)
+                    .constrainAs(arrow) {
+                        top.linkTo(title.top)
+                        bottom.linkTo(title.bottom)
+                        start.linkTo(title.end)
+                    },
+                painter = painterResource(id = R.drawable.ic_path_10),
+                contentDescription = null
+            )
+            Image(
+                modifier = Modifier
+                    .width(24.dp)
+                    .height(24.dp)
+                    .constrainAs(setting) {
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
+                painter = painterResource(id = R.drawable.ic_setting_24),
+                contentDescription = null
+            )
+        }
+        Spacer(modifier = Modifier.height(26.dp))
         LazyColumn(
             modifier = Modifier.padding(horizontal = 17.dp),
             verticalArrangement = Arrangement.spacedBy(26.dp)
