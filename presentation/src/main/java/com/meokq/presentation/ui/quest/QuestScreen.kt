@@ -32,6 +32,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.meokq.presentation.R
 import com.meokq.presentation.theme.MainBackground
 import com.meokq.presentation.theme.MainPrimary
+import com.meokq.presentation.theme.MainPrimary2
+import com.meokq.presentation.theme.MainPrimary3
 import com.meokq.presentation.theme.ShadowColor
 import com.meokq.presentation.theme.White
 
@@ -47,8 +49,8 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MainPrimary,
-                    shape = RoundedCornerShape(bottomStart = 30.dp, bottomEnd = 30.dp)
+                    color = MainPrimary3,
+                    shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
                 )
                 .padding(vertical = 36.dp, horizontal = 30.dp)
         ) {
@@ -107,16 +109,19 @@ fun QuestCard(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .shadow(elevation = 10.dp, spotColor = ShadowColor, ambientColor = ShadowColor)
-            .background(color = White, shape = RoundedCornerShape(size = 16.dp)),
+            .shadow(elevation = 10.dp, spotColor = ShadowColor, ambientColor = ShadowColor),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = White)
+                .background(
+                    color = White,
+                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+                )
                 .padding(horizontal = 23.dp, vertical = 25.dp),
+
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -127,7 +132,9 @@ fun QuestCard(
                 contentDescription = null
             )
             Spacer(modifier = Modifier.width(27.dp))
-            Column {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(7.dp)
+            ) {
                 Text(
                     text = "커피크라운", style = CustomTypo.headlineLarge.copy(
                         fontWeight = FontWeight(700)
@@ -140,7 +147,10 @@ fun QuestCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(color = MainPrimary)
+                .background(
+                    color = MainPrimary2,
+                    shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
+                )
                 .padding(vertical = 10.dp)
                 .clickable { },
             contentAlignment = Alignment.Center
