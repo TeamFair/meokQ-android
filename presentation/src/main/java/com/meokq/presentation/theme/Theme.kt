@@ -1,5 +1,6 @@
 package com.meokq.presentation.theme
 
+import CustomTypo
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -64,7 +65,7 @@ fun MeokQTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = CustomTypo,
         content = content
     )
 }
