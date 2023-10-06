@@ -1,4 +1,3 @@
-
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
@@ -17,62 +16,83 @@ val Pretendard = FontFamily(
     Font(R.font.pretendardregular, FontWeight.Normal),
 )
 val CustomTypo = Typography(
+    //title
     titleLarge = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Bold,
         color = TextBlack,
-        fontSize = 34.sp,
-        lineHeight = 41.sp
-    ),
-    titleMedium= TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.Medium,
-        color = TextBlack,
         fontSize = 23.sp,
-        lineHeight = 27.sp
-    ),
-    titleSmall= TextStyle(
+        lineHeight = 24.sp
+    ), titleMedium = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Medium,
         color = TextBlack,
-        fontSize = 20.sp,
-        lineHeight = 24.sp
+        fontSize = 22.sp,
+        lineHeight = 17.sp
     ),
-    headlineLarge= TextStyle(
+    //heading
+    headlineLarge = TextStyle(
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.Medium,
+        color = TextBlack,
+        fontSize = 19.sp,
+        lineHeight = 23.sp
+    ), headlineMedium = TextStyle(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Bold,
         color = TextBlack,
-        fontSize = 16.sp,
-        lineHeight = 19.sp
-    ),
-    bodyMedium = TextStyle(
+        fontSize = 17.sp,
+        lineHeight = 20.sp
+    ), headlineSmall = TextStyle(
         fontFamily = Pretendard,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
+        color = TextBlack,
+        fontSize = 15.sp,
+        lineHeight = 18.sp
+    ),
+
+    //body
+    bodySmall = TextStyle(
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.Normal,
         color = TextBlack,
         fontSize = 15.sp,
         lineHeight = 22.sp
     ),
-    labelLarge = TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.Medium,
-        color = TextBlack,
-        fontSize = 14.sp,
-        lineHeight = 20.sp
-    ),
-
+    //caption
     labelMedium = TextStyle(
         fontFamily = Pretendard,
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Normal,
+        color = TextBlack,
+        fontSize = 13.sp,
+        lineHeight = 20.sp
+    ), labelSmall = TextStyle(
+        fontFamily = Pretendard,
+        fontWeight = FontWeight.Normal,
         color = TextBlack,
         fontSize = 12.sp,
-        lineHeight = 14.sp
-    ),
-    labelSmall= TextStyle(
-        fontFamily = Pretendard,
-        fontWeight = FontWeight.Medium,
-        color = TextBlack,
-        fontSize = 10.sp,
-        lineHeight = 12.sp
+        lineHeight = 18.sp
     )
-
 )
+val Subtitle01 = CustomTypo.headlineMedium.copy(
+    fontSize = 16.sp, lineHeight = 24.sp, fontWeight = FontWeight.SemiBold
+)
+val Subtitle02 = Subtitle01.copy(fontWeight = FontWeight.Normal)
+val Button = CustomTypo.bodyLarge.copy(
+    fontSize = 16.sp,
+    lineHeight = 18.sp,
+)
+val TabBold = CustomTypo.headlineLarge.copy(
+    fontSize = 14.sp,
+    lineHeight = 24.sp,
+)
+val TabRegular = TabBold.copy(
+    fontWeight = FontWeight.Normal
+)
+val Badge01 = CustomTypo.bodyLarge.copy(
+    fontSize = 10.sp, lineHeight = 12.sp, color = TextBlack
+)
+val Badge02 = TabRegular.copy(
+    fontSize = 10.sp, lineHeight = 12.sp, color = TextBlack
+)
+
