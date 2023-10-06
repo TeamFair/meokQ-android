@@ -1,7 +1,6 @@
 package com.meokq.presentation.ui.quest
 
 import CustomTypo
-import android.graphics.drawable.shapes.Shape
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,10 +29,11 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.meokq.presentation.R
+import com.meokq.presentation.theme.BackGround
 import com.meokq.presentation.theme.MainBackground
-import com.meokq.presentation.theme.MainPrimary
 import com.meokq.presentation.theme.MainPrimary2
 import com.meokq.presentation.theme.MainPrimary3
+import com.meokq.presentation.theme.Primary
 import com.meokq.presentation.theme.ShadowColor
 import com.meokq.presentation.theme.White
 
@@ -43,13 +43,13 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(color = MainBackground)
+            .background(color = BackGround)
     ) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MainPrimary3,
+                    color = Primary,
                     shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
                 )
                 .padding(vertical = 36.dp, horizontal = 30.dp)
@@ -148,7 +148,7 @@ fun QuestCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = MainPrimary2,
+                    color = Primary,
                     shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
                 )
                 .padding(vertical = 10.dp)

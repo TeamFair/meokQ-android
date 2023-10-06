@@ -27,9 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meokq.presentation.R
-import com.meokq.presentation.getResourceId
 import com.meokq.presentation.theme.KakaoLoginButton
-import com.meokq.presentation.theme.MainPrimary
+import com.meokq.presentation.theme.Primary
 import com.meokq.presentation.theme.White
 
 @Preview
@@ -63,7 +62,7 @@ fun LoginScreen(
         Text(
             text = stringResource(R.string.application_name), style = TextStyle(
                 fontSize = 50.sp,
-                color = MainPrimary,
+                color = Primary,
                 fontWeight = FontWeight.Bold
             )
         )
