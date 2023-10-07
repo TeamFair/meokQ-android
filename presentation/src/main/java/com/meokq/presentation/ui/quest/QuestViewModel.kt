@@ -20,7 +20,8 @@ val tmpQuest =  QuestUIModel(
     missionCount = 3,
     name = "테스트마켓",
     openingTime = "09:00",
-    closingTime = "18:00"
+    closingTime = "18:00",
+    phoneNumber = "070-1122-3344"
 )
     init {
         tmpQuestList.add(
@@ -36,7 +37,8 @@ val tmpQuest =  QuestUIModel(
                 missionCount = 3,
                 name = "테스트마켓",
                 openingTime = "09:00",
-                closingTime = "18:00"
+                closingTime = "18:00",
+                phoneNumber = "070-1122-3344"
             )
         )
     }

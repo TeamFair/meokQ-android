@@ -10,4 +10,5 @@ data class QuestUIModel(
     val name: String,
     val openingTime: String,
     val closingTime: String,
+    val phoneNumber:String
 )
