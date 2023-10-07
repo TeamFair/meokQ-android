@@ -1,6 +1,7 @@
 package com.meokq.presentation.ui.store
 
 import CustomTypo
+import Subtitle02
 import TabBold
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -8,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,6 +44,8 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import com.meokq.presentation.model.QuestStatus
 import com.meokq.presentation.model.questStatusMap
@@ -64,9 +68,13 @@ fun StoreScreen(
         horizontalAlignment = Alignment.Start
     ) {
         Image(
-            modifier = Modifier.padding(horizontal = 15.dp, vertical = 12.dp),
+            modifier = Modifier
+                .clickable {
+                    onBackClick()
+                }
+                .padding(horizontal = 15.dp, vertical = 12.dp),
             painter = painterResource(id = R.drawable.ic_arrow_back),
-            colorFilter = ColorFilter.tint(color = Gray200),
+            colorFilter = ColorFilter.tint(color = Black),
             contentDescription = null
         )
 
@@ -145,22 +153,50 @@ fun StoreScreen(
             },
         ) {
             titles.forEachIndexed { index, title ->
-                Tab(selected = pagerState.currentPage == index, onClick = {
+                val isSelected = if (pagerState.currentPage == index) true else false
+                Tab(selected = isSelected, onClick = {
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(index)
 //                         questStatusMap[titles[pagerState.currentPage]]
                     }
                 }, text = {
-                    Text(
-                        text = title,
-                        style = TabBold,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
+                    Row {
+                        Text(
+                            text = title,
+                            style = TabBold.copy(
+                                color = if (isSelected) Black else Gray200
+
+                            ),
+                            maxLines = 1,
+                        )
+                        //TODO 숫자 data 추가
+                        Text(
+                            text = " 1",
+                            style = TabBold.copy(
+                                color = if (isSelected) NotificationYellow else Gray200
+                            ),
+                            maxLines = 1,
+                        )
+                    }
+
                 })
             }
         }
         HorizontalPager(state = pagerState) {
+            if (storeViewModel.tmpMissionList.isEmpty())
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .background(color = BackGround),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = stringResource(R.string.store_mission_empty),
+                        style = Subtitle02.copy(
+                            color = Color(0xFFA4A4A4)
+                        )
+                    )
+                }
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()
