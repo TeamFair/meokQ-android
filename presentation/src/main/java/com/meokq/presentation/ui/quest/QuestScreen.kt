@@ -121,6 +121,7 @@ fun QuestCard(
 
             verticalAlignment = Alignment.CenterVertically
         ) {
+            //image section
             Image(
                 modifier = Modifier
                     .width(74.dp)
