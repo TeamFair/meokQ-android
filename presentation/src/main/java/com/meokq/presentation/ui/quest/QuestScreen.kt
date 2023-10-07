@@ -30,9 +30,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.meokq.presentation.R
 import com.meokq.presentation.theme.BackGround
-import com.meokq.presentation.theme.MainBackground
-import com.meokq.presentation.theme.MainPrimary2
-import com.meokq.presentation.theme.MainPrimary3
 import com.meokq.presentation.theme.Primary
 import com.meokq.presentation.theme.ShadowColor
 import com.meokq.presentation.theme.White
@@ -84,7 +81,7 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom)
                     },
-                painter = painterResource(id = R.drawable.ic_setting_24),
+                painter = painterResource(id = R.drawable.ic_setting),
                 contentDescription = null
             )
         }

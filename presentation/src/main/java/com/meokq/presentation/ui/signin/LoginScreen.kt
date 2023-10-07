@@ -1,7 +1,10 @@
 package com.meokq.presentation.ui.signin
 
+import CustomTypo
+import TabRegular
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,10 +26,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meokq.presentation.R
+import com.meokq.presentation.theme.Gray300
 import com.meokq.presentation.theme.KakaoLoginButton
 import com.meokq.presentation.theme.Primary
 import com.meokq.presentation.theme.White
@@ -47,26 +52,19 @@ fun LoginScreen(
     ) {
         Image(
             modifier = Modifier
-                .width(150.dp)
-                .height(150.dp)
+                .width(104.dp)
+                .height(104.dp)
                 .clickable(
                     //임시 navigate 연결
                     onClick = onNavigate
                 ),
             painter = painterResource(
-                R.drawable.iv_logo_150
+                R.drawable.iv_logo_104
             ),
             contentDescription = "login logo",
-
-            )
-        Text(
-            text = stringResource(R.string.application_name), style = TextStyle(
-                fontSize = 50.sp,
-                color = Primary,
-                fontWeight = FontWeight.Bold
-            )
         )
-        Spacer(modifier = Modifier.height(150.dp))
+
+        Spacer(modifier = Modifier.height(109.dp))
         LoginButton(
             text = stringResource(R.string.text_button_sign_in_kakao),
             painter = painterResource(id = R.drawable.ic_login_kakao_18),
@@ -76,8 +74,11 @@ fun LoginScreen(
         LoginButton(
             text = stringResource(R.string.text_button_sign_in_google),
             painter = painterResource(id = R.drawable.ic_login_google_18),
-            backgroundColor = White
+            backgroundColor = White,
+            isBorder = true
         )
+        Spacer(modifier = Modifier.height(25.dp))
+        Text(stringResource(R.string.login_skip), style = CustomTypo.labelSmall.copy(color = Gray300), textDecoration = TextDecoration.Underline)
     }
 }
 
@@ -86,18 +87,19 @@ fun LoginScreen(
 fun LoginButton(
     text: String,
     painter: Painter,
-    backgroundColor: Color
+    backgroundColor: Color,
+    isBorder: Boolean = false
 ) {
     Row(
         modifier = Modifier
-            .shadow(
-                elevation = 2.dp,
-                spotColor = Color(0x40000000),
-                ambientColor = Color(0x40000000)
+            .border(
+                width = 1.dp,
+                color = if (isBorder) Color(0xFFD1D1D1) else Color.Transparent,
+                shape = RoundedCornerShape(size = 50.dp)
             )
-            .background(color = backgroundColor, shape = RoundedCornerShape(size = 6.dp))
-            .width(250.dp)
-            .height(50.dp),
+            .width(269.dp)
+            .height(50.dp)
+            .background(color = backgroundColor, shape = RoundedCornerShape(size = 50.dp)),
         horizontalArrangement = Arrangement.SpaceAround,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -107,6 +109,7 @@ fun LoginButton(
         )
         Text(
             text = text,
+            style = TabRegular
         )
         Text(
             text = "",

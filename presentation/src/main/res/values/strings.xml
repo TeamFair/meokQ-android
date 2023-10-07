@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">맛Q</string>
-    <string name="text_button_sign_in_kakao">Login with Kakao</string>
-    <string name="text_button_sign_in_google">Sign with Google</string>
+    <string name="text_button_sign_in_kakao">카카오로 로그인하기</string>
+    <string name="text_button_sign_in_google">Google로 로그인하기</string>
+    <string name="login_skip">로그인 없이 둘러보기</string>
 </resources>
