@@ -62,8 +62,8 @@ fun StoreScreen(
     storeViewModel: StoreViewModel = viewModel(),
 ) {
     val uiModel = storeViewModel.tmpStoreList[0]
-    var pagerState = rememberPagerState(pageCount = { 4 })
-    val coroutineScope = rememberCoroutineScope()
+
+
     Column(
         horizontalAlignment = Alignment.Start
     ) {
@@ -137,8 +137,10 @@ fun StoreScreen(
                 }
             }
         }
-        //2. Tab
+        var pagerState = rememberPagerState(pageCount = { 4 })
+        val coroutineScope = rememberCoroutineScope()
         val titles = listOf("퀘스트", "진행중", "재도전", "완료")
+        //2. Tab
         TabRow(
             selectedTabIndex = pagerState.currentPage,
             containerColor = White,
