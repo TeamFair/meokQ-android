@@ -53,11 +53,7 @@ fun LoginScreen(
         Image(
             modifier = Modifier
                 .width(104.dp)
-                .height(104.dp)
-                .clickable(
-                    //임시 navigate 연결
-                    onClick = onNavigate
-                ),
+                .height(104.dp),
             painter = painterResource(
                 R.drawable.iv_logo_104
             ),
@@ -78,10 +74,17 @@ fun LoginScreen(
             isBorder = true
         )
         Spacer(modifier = Modifier.height(25.dp))
-        Text(stringResource(R.string.login_skip), style = CustomTypo.labelSmall.copy(color = Gray300), textDecoration = TextDecoration.Underline)
+        Text(
+            modifier = Modifier.clickable(
+                //임시 navigate 연결
+                onClick = onNavigate
+            ),
+            text = stringResource(R.string.login_skip),
+            style = CustomTypo.labelSmall.copy(color = Gray300),
+            textDecoration = TextDecoration.Underline
+        )
     }
 }
-
 
 @Composable
 fun LoginButton(

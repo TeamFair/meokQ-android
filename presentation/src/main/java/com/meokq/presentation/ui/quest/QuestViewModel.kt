@@ -11,20 +11,20 @@ import javax.inject.Inject
 class QuestViewModel @Inject constructor() : BaseViewModel() {
     //레이아웃 작업을 위해 임시로 만들어둔 list
     val tmpQuestList = mutableStateListOf<QuestUIModel>()
-
+val tmpQuest =  QuestUIModel(
+    address = "서울특별시 강남구 대조동",
+    businessOwnerId = "bigSample2",
+    marketId = "marketIdSample1",
+    district = "1168000000",
+    logoImage = "https://firebasestorage.googleapis.com/v0/b/teamfair-7fb46.appspot.com/o/defaultImage%2FLogo.png?alt=media&token=3ff92859-7919-49e6-a4ca-173f1635df91",
+    missionCount = 3,
+    name = "테스트마켓",
+    openingTime = "09:00",
+    closingTime = "18:00"
+)
     init {
         tmpQuestList.add(
-            QuestUIModel(
-                address = "서울특별시 강남구 대조동",
-                businessOwnerId = "bigSample2",
-                marketId = "marketIdSample1",
-                district = "1168000000",
-                logoImage = "https://firebasestorage.googleapis.com/v0/b/teamfair-7fb46.appspot.com/o/defaultImage%2FLogo.png?alt=media&token=3ff92859-7919-49e6-a4ca-173f1635df91\"",
-                missionCount = 3,
-                name = "테스트마켓",
-                openingTime = "09:00",
-                closingTime = "18:00"
-            )
+            tmpQuest
         )
         tmpQuestList.add(
             QuestUIModel(
@@ -32,7 +32,7 @@ class QuestViewModel @Inject constructor() : BaseViewModel() {
                 businessOwnerId = "bigSample1",
                 marketId = "marketIdSample2",
                 district = "1168000000",
-                logoImage = "\"https://firebasestorage.googleapis.com/v0/b/teamfair-7fb46.appspot.com/o/defaultImage%2FLogo.png?alt=media&token=3ff92859-7919-49e6-a4ca-173f1635df91\"",
+                logoImage = "https://firebasestorage.googleapis.com/v0/b/teamfair-7fb46.appspot.com/o/defaultImage%2FLogo.png?alt=media&token=3ff92859-7919-49e6-a4ca-173f1635df91",
                 missionCount = 3,
                 name = "테스트마켓",
                 openingTime = "09:00",

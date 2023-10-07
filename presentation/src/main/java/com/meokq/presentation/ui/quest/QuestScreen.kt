@@ -3,9 +3,8 @@ package com.meokq.presentation.ui.quest
 import CustomTypo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,18 +21,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.meokq.presentation.R
+import com.meokq.presentation.model.QuestUIModel
 import com.meokq.presentation.theme.BackGround
+import com.meokq.presentation.theme.BadgeYellow
+import com.meokq.presentation.theme.Gray200
+import com.meokq.presentation.theme.Gray400
 import com.meokq.presentation.theme.Primary
-import com.meokq.presentation.theme.ShadowColor
+import com.meokq.presentation.theme.TextYellow
 import com.meokq.presentation.theme.White
+import com.meokq.presentation.ui.global.TextBadge
 
+@Preview
 @Composable
 fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
     Column(
@@ -90,70 +100,109 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
             modifier = Modifier.padding(horizontal = 17.dp),
             verticalArrangement = Arrangement.spacedBy(26.dp)
         ) {
-            items(questViewModel.tmpQuestList) { it ->
-                QuestCard()
+            items(questViewModel.tmpQuestList) { quest ->
+                QuestCard(uiModel = quest)
             }
         }
     }
 
 }
 
-@Preview
 @Composable
 fun QuestCard(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    uiModel: QuestUIModel
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .shadow(elevation = 10.dp, spotColor = ShadowColor, ambientColor = ShadowColor),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = White,
-                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
-                )
-                .padding(horizontal = 23.dp, vertical = 25.dp),
-
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            //image section
-            Image(
-                modifier = Modifier
-                    .width(74.dp)
-                    .background(color = White, shape = RoundedCornerShape(size = 16.dp)),
-                painter = painterResource(id = R.drawable.iv_logo_150),
-                contentDescription = null
+    Row(
+        modifier = Modifier
+            .shadow(
+                elevation = 20.dp,
+                spotColor = Color(0x0D7D7D7D),
+                ambientColor = Color(0x0D7D7D7D)
             )
-            Spacer(modifier = Modifier.width(27.dp))
-            Column(
-                verticalArrangement = Arrangement.spacedBy(7.dp)
-            ) {
+            .fillMaxWidth()
+            .background(
+                color = White,
+                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+            )
+            .padding(16.dp),
+
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
+    ) {
+        //image section
+        AsyncImage(
+            modifier = Modifier
+                .width(76.dp)
+                .height(76.dp)
+                .border(
+                    width = 0.8.dp,
+                    color = Color(0xFFD4D4D4),
+                    shape = RoundedCornerShape(size = 6.dp)
+                ),
+            model = uiModel.logoImage,
+            contentDescription = null
+        )
+        Spacer(modifier = Modifier.width(14.dp))
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Row {
                 Text(
-                    text = "커피크라운", style = CustomTypo.headlineLarge.copy(
-                        fontWeight = FontWeight(700)
+                    text = uiModel.name, style = CustomTypo.headlineMedium.copy(
+                        lineHeight = 21.sp
                     )
                 )
-                Text(text = "영업시간", style = CustomTypo.labelLarge)
-                Text(text = "서울 강남구 테헤란로", style = CustomTypo.labelSmall)
-            }
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(
-                    color = Primary,
-                    shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp)
+                Spacer(modifier = Modifier.width(8.dp))
+                TextBadge(
+                    backgroundColor = BadgeYellow,
+                    textColor = TextYellow,
+                    text = "퀘스트 ${uiModel.missionCount}개"
                 )
-                .padding(vertical = 10.dp)
-                .clickable { },
-            contentAlignment = Alignment.Center
-        ) {
-            Text(text = "퀘스트 2개", style = CustomTypo.headlineLarge)
+            }
+
+            StoreInfo(
+                icon = R.drawable.ic_clock,
+                text = uiModel.openingTime + "~" + uiModel.openingTime
+            )
+            StoreInfo(
+                icon = R.drawable.ic_map,
+                text = uiModel.address
+            )
+
         }
+        Image(
+            modifier = Modifier.height(18.dp),
+            painter = painterResource(id = R.drawable.ic_arrow_forward),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(color = Gray200),
+        )
+    }
+}
+
+@Composable
+fun StoreInfo(
+    icon: Int,
+    text: String
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = Modifier
+                .width(10.dp)
+                .height(10.dp),
+            painter = painterResource(id = icon),
+            contentDescription = "clock"
+        )
+        Spacer(modifier = Modifier.width(5.dp))
+        Text(
+            text = text,
+            style = CustomTypo.labelSmall.copy(color = Gray400),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 2,
+        )
     }
 }

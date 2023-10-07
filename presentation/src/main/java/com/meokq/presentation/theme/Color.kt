@@ -7,7 +7,7 @@ val Primary = Color(0xFFFFEA00)
 val NotificationYellow  = Color(0xFFFFCD00)
 val TabYellow  = Color(0xFFFBE176)
 val BadgeYellow  = Color(0xFFFDF6E6)
-val TextYellow  = Color(0xFFFDF6E6)
+val TextYellow  = Color(0xFFE2BC32)
 val BackGround = Color(0xFFF6F6F6)
 val KakaoLoginButton = Color(0xFFFEE500)
 
