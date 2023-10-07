@@ -4,21 +4,25 @@ import CustomTypo
 import TabBold
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,13 +38,17 @@ import com.meokq.presentation.theme.BadgeYellow
 import com.meokq.presentation.theme.Gray200
 import com.meokq.presentation.theme.TextYellow
 import com.meokq.presentation.ui.global.TextBadge
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.text.style.TextOverflow
+import com.meokq.presentation.model.QuestStatus
+import com.meokq.presentation.model.questStatusMap
+import com.meokq.presentation.theme.BackGround
+import com.meokq.presentation.theme.NotificationYellow
 import com.meokq.presentation.theme.White
-import com.meokq.presentation.ui.quest.QuestViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -51,6 +59,7 @@ fun StoreScreen(
 ) {
     val uiModel = storeViewModel.tmpStoreList[0]
     var pagerState = rememberPagerState(pageCount = { 4 })
+    val coroutineScope = rememberCoroutineScope()
     Column(
         horizontalAlignment = Alignment.Start
     ) {
@@ -121,25 +130,59 @@ fun StoreScreen(
             }
         }
         //2. Tab
-        val titles = listOf("퀘스트", "재도전", "진행중", "완료")
+        val titles = listOf("퀘스트", "진행중", "재도전", "완료")
         TabRow(
             selectedTabIndex = pagerState.currentPage,
             containerColor = White,
             contentColor = White,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
-                    Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage])
+                    modifier = Modifier
+                        .tabIndicatorOffset(tabPositions[pagerState.currentPage])
+                        .width(59.dp),
+                    color = NotificationYellow,
                 )
             },
         ) {
             titles.forEachIndexed { index, title ->
                 Tab(selected = pagerState.currentPage == index, onClick = {
-                    //TODO: change tab
+                    coroutineScope.launch {
+                        pagerState.animateScrollToPage(index)
+//                         questStatusMap[titles[pagerState.currentPage]]
+                    }
                 }, text = {
-                    Text(text = title,
+                    Text(
+                        text = title,
                         style = TabBold,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis) })
+                        overflow = TextOverflow.Ellipsis
+                    )
+                })
+            }
+        }
+        HorizontalPager(state = pagerState) {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .background(color = BackGround)
+                    .padding(horizontal = 20.dp, vertical = 15.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+                items(storeViewModel.tmpMissionList) { mission ->
+                    questStatusMap[titles[pagerState.currentPage]]?.let { it1 ->
+                        MissionInfo(
+                            status = it1,
+                            reward = mission.reward,
+                            missionDescription = mission.missionDescription
+                        )
+                    } ?: run {
+                        MissionInfo(
+                            status = QuestStatus.PUBLISHED,
+                            reward = mission.reward,
+                            missionDescription = mission.missionDescription
+                        )
+                    }
+                }
             }
         }
     }

@@ -2,6 +2,8 @@ package com.meokq.presentation.ui.store
 
 import androidx.compose.runtime.mutableStateListOf
 import com.meokq.presentation.base.BaseViewModel
+import com.meokq.presentation.model.MissionMarket
+import com.meokq.presentation.model.QuestStatus
 import com.meokq.presentation.model.QuestUIModel
 import javax.inject.Inject
 
@@ -20,8 +22,18 @@ class StoreViewModel @Inject constructor() : BaseViewModel() {
         closingTime = "18:00",
         phoneNumber = "070-1111-2222"
     )
+    val tmpMissionList = mutableStateListOf<MissionMarket>()
 
+    val tmpMission = MissionMarket(
+        missionId = "H3dLBn4cfVT7g6Ch1aie8YN2kP63",
+        missionDescription = "테스트미션",
+        status =  QuestStatus.APPROVED,
+        reward = "오후 12시 전에 아메리카노 2잔주문",
+        paidStatus = true
+    )
     init {
         tmpStoreList.add(tmpQuest)
+        tmpMissionList.add(tmpMission)
+        tmpMissionList.add(tmpMission)
     }
 }
