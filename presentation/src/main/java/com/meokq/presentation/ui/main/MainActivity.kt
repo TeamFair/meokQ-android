@@ -15,8 +15,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.meokq.presentation.R
 import com.meokq.presentation.base.BaseComposeActivity
 import com.meokq.presentation.ui.nav.BottomNavigationBar
 import com.meokq.presentation.ui.nav.BottomNavigationItem
@@ -54,9 +56,9 @@ class MainComposeActivity : BaseComposeActivity<MainViewModel>() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.surface),
-                listOf(
-                    BottomNavigationItem("Quest", Icons.Default.Star),
-                    BottomNavigationItem("Coupon", Icons.Default.List)
+                items = listOf(
+                    BottomNavigationItem("퀘스트",  R.drawable.ic_quest,R.drawable.ic_quest_unactive),
+                    BottomNavigationItem("쿠폰", R.drawable.ic_coupon,R.drawable.ic_coupon_unactive)
                 )
             )
         }) {
