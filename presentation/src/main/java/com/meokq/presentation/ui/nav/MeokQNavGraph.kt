@@ -8,7 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.meokq.presentation.ui.coupon.CouponScreen
+import com.meokq.presentation.ui.district.DistrictScreen
 import com.meokq.presentation.ui.quest.QuestScreen
+import com.meokq.presentation.ui.setting.SettingScreen
 import com.meokq.presentation.ui.store.StoreScreen
 
 @Composable
@@ -17,6 +19,22 @@ fun MainNavHost(navController: NavHostController = rememberNavController()) {
         composable(MeokQDestination.QUEST_ROUTE) {
             QuestScreen(
                 navController = navController
+            )
+        }
+        composable(MeokQDestination.SETTING_ROUTE
+        ) {
+            SettingScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+            )
+        }
+        composable(MeokQDestination.DISTRICT_ROUTE
+        ) {
+            DistrictScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                },
             )
         }
         composable(
