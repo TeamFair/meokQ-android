@@ -27,8 +27,8 @@ val CustomTypo = Typography(
         fontFamily = Pretendard,
         fontWeight = FontWeight.Medium,
         color = TextBlack,
-        fontSize = 22.sp,
-        lineHeight = 17.sp
+        fontSize = 17.sp,
+        lineHeight = 22.sp
     ),
     //heading
     headlineLarge = TextStyle(

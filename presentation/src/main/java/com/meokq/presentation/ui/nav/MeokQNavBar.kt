@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -70,7 +71,7 @@ fun BottomNavigationItem(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            modifier = Modifier.height(24.dp),
+            modifier = Modifier.width(24.dp),
             painter = painterResource(id = if (isSelected) item.selectIcon else item.unSelectIcon),
             contentDescription = item.text,
         )

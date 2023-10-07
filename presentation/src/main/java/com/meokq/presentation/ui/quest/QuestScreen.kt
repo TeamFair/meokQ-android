@@ -4,6 +4,7 @@ import CustomTypo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,6 +32,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.meokq.presentation.R
 import com.meokq.presentation.model.QuestUIModel
@@ -42,10 +45,13 @@ import com.meokq.presentation.theme.Primary
 import com.meokq.presentation.theme.TextYellow
 import com.meokq.presentation.theme.White
 import com.meokq.presentation.ui.global.TextBadge
+import com.meokq.presentation.ui.nav.MeokQDestination
 
-@Preview
 @Composable
-fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
+fun QuestScreen(
+    questViewModel: QuestViewModel = viewModel(),
+    navController: NavController = rememberNavController()
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -57,9 +63,8 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
                 .fillMaxWidth()
                 .background(
                     color = Primary,
-                    shape = RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
                 )
-                .padding(vertical = 36.dp, horizontal = 30.dp)
+                .padding(vertical = 12.dp, horizontal = 30.dp)
         ) {
             val (title, arrow, setting) = createRefs()
             Text(
@@ -67,9 +72,7 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
 
-                }, text = "서울 강남구", style = CustomTypo.titleSmall.copy(
-                    fontWeight = FontWeight(600)
-                )
+                }, text = "서울 강남구", style = CustomTypo.titleMedium
             )
             Image(
                 modifier = Modifier
@@ -84,14 +87,14 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
             )
             Image(
                 modifier = Modifier
-                    .width(24.dp)
-                    .height(24.dp)
+                    .width(17.dp)
+                    .height(17.dp)
                     .constrainAs(setting) {
                         end.linkTo(parent.end)
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom)
                     },
-                painter = painterResource(id = R.drawable.ic_setting),
+                painter = painterResource(id = R.drawable.ic_setting_unactive),
                 contentDescription = null
             )
         }
@@ -101,7 +104,12 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
             verticalArrangement = Arrangement.spacedBy(26.dp)
         ) {
             items(questViewModel.tmpQuestList) { quest ->
-                QuestCard(uiModel = quest)
+                QuestCard(
+                    uiModel = quest,
+                    onNavigate = {id ->
+                        navController.navigate("${MeokQDestination.STORE_ROUTE}/$id")
+                    }
+                )
             }
         }
     }
@@ -110,20 +118,20 @@ fun QuestScreen(questViewModel: QuestViewModel = viewModel()) {
 
 @Composable
 fun QuestCard(
-    modifier: Modifier = Modifier,
-    uiModel: QuestUIModel
+    modifier: Modifier = Modifier, uiModel: QuestUIModel,
+    onNavigate: (String) -> Unit
 ) {
     Row(
         modifier = Modifier
             .shadow(
-                elevation = 20.dp,
-                spotColor = Color(0x0D7D7D7D),
-                ambientColor = Color(0x0D7D7D7D)
+                elevation = 20.dp, spotColor = Color(0x0D7D7D7D), ambientColor = Color(0x0D7D7D7D)
             )
+            .clickable {
+                onNavigate(uiModel.marketId)
+            }
             .fillMaxWidth()
             .background(
-                color = White,
-                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+                color = White, shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
             )
             .padding(16.dp),
 
@@ -139,9 +147,7 @@ fun QuestCard(
                     width = 0.8.dp,
                     color = Color(0xFFD4D4D4),
                     shape = RoundedCornerShape(size = 6.dp)
-                ),
-            model = uiModel.logoImage,
-            contentDescription = null
+                ), model = uiModel.logoImage, contentDescription = null
         )
         Spacer(modifier = Modifier.width(14.dp))
         Column(
@@ -164,12 +170,10 @@ fun QuestCard(
             }
 
             StoreInfo(
-                icon = R.drawable.ic_clock,
-                text = uiModel.openingTime + "~" + uiModel.openingTime
+                icon = R.drawable.ic_clock, text = uiModel.openingTime + "~" + uiModel.openingTime
             )
             StoreInfo(
-                icon = R.drawable.ic_map,
-                text = uiModel.address
+                icon = R.drawable.ic_map, text = uiModel.address
             )
 
         }
@@ -184,8 +188,7 @@ fun QuestCard(
 
 @Composable
 fun StoreInfo(
-    icon: Int,
-    text: String
+    icon: Int, text: String
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically
