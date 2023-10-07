@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.nestedscroll.nestedScrollModifierNode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -68,7 +69,11 @@ fun QuestScreen(
         ) {
             val (title, arrow, setting) = createRefs()
             Text(
-                modifier = Modifier.constrainAs(title) {
+                modifier = Modifier
+                    .clickable {
+                        navController.navigate(MeokQDestination.DISTRICT_ROUTE)
+                    }
+                    .constrainAs(title) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
 
@@ -89,6 +94,9 @@ fun QuestScreen(
                 modifier = Modifier
                     .width(17.dp)
                     .height(17.dp)
+                    .clickable {
+                        navController.navigate(MeokQDestination.SETTING_ROUTE)
+                    }
                     .constrainAs(setting) {
                         end.linkTo(parent.end)
                         top.linkTo(parent.top)
