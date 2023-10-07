@@ -13,7 +13,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -40,27 +42,43 @@ class MainComposeActivity : BaseComposeActivity<MainViewModel>() {
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route ?: MeokQDestination.QUEST_ROUTE
-
+        val bottomNavigationBarVisibility by remember {
+            derivedStateOf {
+                listOf(
+                    MeokQDestination.QUEST_ROUTE,
+                    MeokQDestination.COUPON_ROUTE,
+                ).contains(navBackStackEntry?.destination?.route)
+            }
+        }
         Scaffold(bottomBar = {
-            BottomNavigationBar(
-                selectedItemPosition = when (currentRoute) {
-                    MeokQDestination.QUEST_ROUTE -> 0
-                    MeokQDestination.COUPON_ROUTE -> 1
-                    else -> 0
-                }, { selectedItemPosition ->
-                    when (selectedItemPosition) {
-                        0 -> navController.navigate(MeokQDestination.QUEST_ROUTE)
-                        1 -> navController.navigate(MeokQDestination.COUPON_ROUTE)
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.surface),
-                items = listOf(
-                    BottomNavigationItem("퀘스트",  R.drawable.ic_quest,R.drawable.ic_quest_unactive),
-                    BottomNavigationItem("쿠폰", R.drawable.ic_coupon,R.drawable.ic_coupon_unactive)
+            if (bottomNavigationBarVisibility)
+                BottomNavigationBar(
+                    selectedItemPosition = when (currentRoute) {
+                        MeokQDestination.QUEST_ROUTE -> 0
+                        MeokQDestination.COUPON_ROUTE -> 1
+                        else -> 0
+                    }, { selectedItemPosition ->
+                        when (selectedItemPosition) {
+                            0 -> navController.navigate(MeokQDestination.QUEST_ROUTE)
+                            1 -> navController.navigate(MeokQDestination.COUPON_ROUTE)
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(MaterialTheme.colorScheme.surface),
+                    items = listOf(
+                        BottomNavigationItem(
+                            "퀘스트",
+                            R.drawable.ic_quest,
+                            R.drawable.ic_quest_unactive
+                        ),
+                        BottomNavigationItem(
+                            "쿠폰",
+                            R.drawable.ic_coupon,
+                            R.drawable.ic_coupon_unactive
+                        )
+                    )
                 )
-            )
         }) {
             Box(modifier = Modifier.padding(it)) {
                 MainNavHost(navController)
