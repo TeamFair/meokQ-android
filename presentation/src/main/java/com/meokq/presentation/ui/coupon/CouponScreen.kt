@@ -1,8 +1,5 @@
 package com.meokq.presentation.ui.coupon
 
-import CustomTypo
-import Subtitle02
-import TabBold
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,10 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.meokq.presentation.R
-import com.meokq.presentation.theme.BackGround
-import com.meokq.presentation.theme.Gray200
-import com.meokq.presentation.theme.NotificationYellow
-import com.meokq.presentation.theme.White
+import com.meokq.presentation.theme.MeokQTheme
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -44,7 +38,7 @@ fun CouponScreen(couponViewModel: CouponViewModel = hiltViewModel()) {
     ) {
         Text(
             modifier = Modifier.padding(vertical = 10.dp),
-            text = "쿠폰", style = CustomTypo.titleMedium
+            text = "쿠폰", style = MeokQTheme.typography.Title02
         )
         var pagerState = rememberPagerState(pageCount = { 4 })
         val coroutineScope = rememberCoroutineScope()
@@ -54,14 +48,14 @@ fun CouponScreen(couponViewModel: CouponViewModel = hiltViewModel()) {
         )
         TabRow(
             selectedTabIndex = pagerState.currentPage,
-            containerColor = White,
-            contentColor = White,
+            containerColor = Color.White,
+            contentColor = Color.White,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     modifier = Modifier
                         .tabIndicatorOffset(tabPositions[pagerState.currentPage])
                         .width(59.dp),
-                    color = NotificationYellow,
+                    color = MeokQTheme.colorScheme.notificationYellow,
                 )
             },
         ) {
@@ -76,8 +70,8 @@ fun CouponScreen(couponViewModel: CouponViewModel = hiltViewModel()) {
                     Row {
                         Text(
                             text = title,
-                            style = TabBold.copy(
-                                color = if (isSelected) Color.Black else Gray200
+                            style = MeokQTheme.typography.TabBold.copy(
+                                color = if (isSelected) MeokQTheme.colorScheme.textBlack else MeokQTheme.colorScheme.gray200
 
                             ),
                             maxLines = 1,
@@ -85,8 +79,8 @@ fun CouponScreen(couponViewModel: CouponViewModel = hiltViewModel()) {
                         //TODO 숫자 data 추가
                         Text(
                             text = " 1",
-                            style = TabBold.copy(
-                                color = if (isSelected) NotificationYellow else Gray200
+                            style = MeokQTheme.typography.TabBold.copy(
+                                color = if (isSelected) MeokQTheme.colorScheme.notificationYellow else MeokQTheme.colorScheme.gray200
                             ),
                             maxLines = 1,
                         )
@@ -101,12 +95,12 @@ fun CouponScreen(couponViewModel: CouponViewModel = hiltViewModel()) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .fillMaxHeight()
-                        .background(color = BackGround),
+                        .background(color = MeokQTheme.colorScheme.background),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = stringResource(R.string.store_mission_empty),
-                        style = Subtitle02.copy(
+                        style = MeokQTheme.typography.Subtitle02.copy(
                             color = Color(0xFFA4A4A4)
                         )
                     )
@@ -114,7 +108,7 @@ fun CouponScreen(couponViewModel: CouponViewModel = hiltViewModel()) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = BackGround)
+                    .background(color = MeokQTheme.colorScheme.background)
                     .padding(horizontal = 20.dp, vertical = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {

@@ -1,6 +1,5 @@
 package com.meokq.presentation.ui.quest
 
-import CustomTypo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,13 +37,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.meokq.presentation.R
 import com.meokq.presentation.model.QuestUIModel
-import com.meokq.presentation.theme.BackGround
-import com.meokq.presentation.theme.BadgeYellow
-import com.meokq.presentation.theme.Gray200
-import com.meokq.presentation.theme.Gray400
-import com.meokq.presentation.theme.Primary
-import com.meokq.presentation.theme.TextYellow
-import com.meokq.presentation.theme.White
+import com.meokq.presentation.theme.MeokQTheme
 import com.meokq.presentation.ui.global.TextBadge
 import com.meokq.presentation.ui.nav.MeokQDestination
 
@@ -57,13 +50,13 @@ fun QuestScreen(
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(color = BackGround)
+            .background(color = MeokQTheme.colorScheme.background)
     ) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = Primary,
+                    color = MeokQTheme.colorScheme.primary,
                 )
                 .padding(vertical = 12.dp, horizontal = 30.dp)
         ) {
@@ -77,7 +70,7 @@ fun QuestScreen(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
 
-                }, text = "서울 강남구", style = CustomTypo.titleMedium
+                }, text = "서울 강남구", style = MeokQTheme.typography.Title02
             )
             Image(
                 modifier = Modifier
@@ -139,7 +132,7 @@ fun QuestCard(
             }
             .fillMaxWidth()
             .background(
-                color = White, shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+                color = Color.White, shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
             )
             .padding(16.dp),
 
@@ -165,14 +158,14 @@ fun QuestCard(
         ) {
             Row {
                 Text(
-                    text = uiModel.name, style = CustomTypo.headlineMedium.copy(
+                    text = uiModel.name, style = MeokQTheme.typography.Heading01.copy(
                         lineHeight = 21.sp
                     )
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 TextBadge(
-                    backgroundColor = BadgeYellow,
-                    textColor = TextYellow,
+                    backgroundColor = MeokQTheme.colorScheme.badgeYellow,
+                    textColor = MeokQTheme.colorScheme.textYellow,
                     text = "퀘스트 ${uiModel.missionCount}개"
                 )
             }
@@ -189,7 +182,7 @@ fun QuestCard(
             modifier = Modifier.height(18.dp),
             painter = painterResource(id = R.drawable.ic_arrow_forward),
             contentDescription = null,
-            colorFilter = ColorFilter.tint(color = Gray200),
+            colorFilter = ColorFilter.tint(color = MeokQTheme.colorScheme.gray200),
         )
     }
 }
@@ -211,7 +204,7 @@ fun StoreInfo(
         Spacer(modifier = Modifier.width(5.dp))
         Text(
             text = text,
-            style = CustomTypo.labelSmall.copy(color = Gray400),
+            style = MeokQTheme.typography.Caption02.copy(color = MeokQTheme.colorScheme.gray400),
             overflow = TextOverflow.Ellipsis,
             maxLines = 2,
         )

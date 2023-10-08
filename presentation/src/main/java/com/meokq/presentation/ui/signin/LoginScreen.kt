@@ -1,7 +1,5 @@
 package com.meokq.presentation.ui.signin
 
-import CustomTypo
-import TabRegular
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -31,10 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meokq.presentation.R
-import com.meokq.presentation.theme.Gray300
-import com.meokq.presentation.theme.KakaoLoginButton
-import com.meokq.presentation.theme.Primary
-import com.meokq.presentation.theme.White
+import com.meokq.presentation.theme.MeokQTheme
 
 @Preview
 @Composable
@@ -45,7 +40,7 @@ fun LoginScreen(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
-            .background(color = White),
+            .background(color = Color.White),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
 
@@ -64,13 +59,13 @@ fun LoginScreen(
         LoginButton(
             text = stringResource(R.string.text_button_sign_in_kakao),
             painter = painterResource(id = R.drawable.ic_login_kakao_18),
-            backgroundColor = KakaoLoginButton
+            backgroundColor = MeokQTheme.colorScheme.kakaoLoginButton
         )
         Spacer(modifier = Modifier.height(27.dp))
         LoginButton(
             text = stringResource(R.string.text_button_sign_in_google),
             painter = painterResource(id = R.drawable.ic_login_google_18),
-            backgroundColor = White,
+            backgroundColor = Color.White,
             isBorder = true
         )
         Spacer(modifier = Modifier.height(25.dp))
@@ -80,7 +75,7 @@ fun LoginScreen(
                 onClick = onNavigate
             ),
             text = stringResource(R.string.login_skip),
-            style = CustomTypo.labelSmall.copy(color = Gray300),
+            style = MeokQTheme.typography.Caption02.copy(color = MeokQTheme.colorScheme.gray300),
             textDecoration = TextDecoration.Underline
         )
     }
@@ -112,7 +107,7 @@ fun LoginButton(
         )
         Text(
             text = text,
-            style = TabRegular
+            style = MeokQTheme.typography.TabRegular
         )
         Text(
             text = "",
