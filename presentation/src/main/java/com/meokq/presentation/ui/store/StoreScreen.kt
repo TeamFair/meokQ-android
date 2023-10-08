@@ -1,8 +1,5 @@
 package com.meokq.presentation.ui.store
 
-import CustomTypo
-import Subtitle02
-import TabBold
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,11 +31,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
-import com.meokq.presentation.R
-import com.meokq.presentation.theme.BadgeYellow
-import com.meokq.presentation.theme.Gray200
-import com.meokq.presentation.theme.TextYellow
 import com.meokq.presentation.ui.global.TextBadge
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRowDefaults
@@ -47,11 +39,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import coil.compose.AsyncImage
+import com.meokq.presentation.R
 import com.meokq.presentation.model.QuestStatus
 import com.meokq.presentation.model.questStatusMap
-import com.meokq.presentation.theme.BackGround
-import com.meokq.presentation.theme.NotificationYellow
-import com.meokq.presentation.theme.White
+import com.meokq.presentation.theme.MeokQTheme
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -98,7 +90,7 @@ fun StoreScreen(
             Spacer(modifier = Modifier.width(17.dp))
             Column {
                 Text(
-                    text = uiModel.name, style = CustomTypo.headlineMedium.copy(
+                    text = uiModel.name, style = MeokQTheme.typography.Heading01.copy(
                         lineHeight = 21.sp
                     )
                 )
@@ -106,8 +98,8 @@ fun StoreScreen(
 
                 Row {
                     Text(
-                        text = uiModel.address, style = CustomTypo.labelMedium.copy(
-                            color = Gray200
+                        text = uiModel.address, style = MeokQTheme.typography.Caption01.copy(
+                            color = MeokQTheme.colorScheme.gray200
                         )
                     )
                     Spacer(modifier = Modifier.width(5.dp))
@@ -131,7 +123,7 @@ fun StoreScreen(
                     )
                     storeInfo.forEach { info ->
                         TextBadge(
-                            backgroundColor = BadgeYellow, textColor = TextYellow, text = info
+                            backgroundColor = MeokQTheme.colorScheme.badgeYellow, textColor = MeokQTheme.colorScheme.textYellow, text = info
                         )
                     }
                 }
@@ -143,14 +135,14 @@ fun StoreScreen(
         //2. Tab
         TabRow(
             selectedTabIndex = pagerState.currentPage,
-            containerColor = White,
-            contentColor = White,
+            containerColor = Color.White,
+            contentColor = Color.White,
             indicator = { tabPositions ->
                 TabRowDefaults.Indicator(
                     modifier = Modifier
                         .tabIndicatorOffset(tabPositions[pagerState.currentPage])
                         .width(59.dp),
-                    color = NotificationYellow,
+                    color = MeokQTheme.colorScheme.notificationYellow,
                 )
             },
         ) {
@@ -165,8 +157,8 @@ fun StoreScreen(
                     Row {
                         Text(
                             text = title,
-                            style = TabBold.copy(
-                                color = if (isSelected) Black else Gray200
+                            style = MeokQTheme.typography.TabBold.copy(
+                                color = if (isSelected) Black else MeokQTheme.colorScheme.gray200
 
                             ),
                             maxLines = 1,
@@ -174,8 +166,8 @@ fun StoreScreen(
                         //TODO 숫자 data 추가
                         Text(
                             text = " 1",
-                            style = TabBold.copy(
-                                color = if (isSelected) NotificationYellow else Gray200
+                            style = MeokQTheme.typography.TabBold.copy(
+                                color = if (isSelected) MeokQTheme.colorScheme.notificationYellow else MeokQTheme.colorScheme.gray200
                             ),
                             maxLines = 1,
                         )
@@ -189,12 +181,12 @@ fun StoreScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
-                        .background(color = BackGround),
+                        .background(color = MeokQTheme.colorScheme.background),
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
                         text = stringResource(R.string.store_mission_empty),
-                        style = Subtitle02.copy(
+                        style = MeokQTheme.typography.Subtitle02.copy(
                             color = Color(0xFFA4A4A4)
                         )
                     )
@@ -202,7 +194,7 @@ fun StoreScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .background(color = BackGround)
+                    .background(color = MeokQTheme.colorScheme.background)
                     .padding(horizontal = 20.dp, vertical = 15.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {

@@ -1,6 +1,5 @@
 package com.meokq.presentation.ui.nav
 
-import Badge01
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -27,8 +26,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.meokq.presentation.theme.Gray200
-import com.meokq.presentation.theme.Gray400
+import com.meokq.presentation.theme.MeokQTheme
 
 data class BottomNavigationItem(
     val text: String,
@@ -78,7 +76,7 @@ fun BottomNavigationItem(
         Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = item.text,
-            style = Badge01.copy(color = if (isSelected) Gray400 else Gray200)
+            style = MeokQTheme.typography.Badge01.copy(color = if (isSelected) MeokQTheme.colorScheme.gray400 else MeokQTheme.colorScheme.gray200)
         )
     }
 }

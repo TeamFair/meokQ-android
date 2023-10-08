@@ -1,6 +1,5 @@
 package com.meokq.presentation.ui.store
 
-import CustomTypo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,8 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meokq.presentation.R
 import com.meokq.presentation.model.QuestStatus
-import com.meokq.presentation.theme.Gray300
-import com.meokq.presentation.theme.White
+import com.meokq.presentation.model.ui
+import com.meokq.presentation.theme.MeokQTheme
 import com.meokq.presentation.ui.global.TextBadge
 
 @Preview
@@ -50,7 +49,7 @@ fun MissionInfo(
                 ambientColor = Color(0x0D7D7D7D)
             )
             .fillMaxWidth()
-            .background(color = White, shape = RoundedCornerShape(size = 12.dp))
+            .background(color = Color.White, shape = RoundedCornerShape(size = 12.dp))
             .clickable {
                 //TODO add copy clipboar logic
             }
@@ -63,16 +62,16 @@ fun MissionInfo(
             horizontalAlignment = Alignment.Start
         ) {
             TextBadge(
-                backgroundColor = status.backgroundColor,
-                textColor = status.textColor,
-                text = status.text
+                backgroundColor = status.ui().backgroundColor,
+                textColor = status.ui().textColor,
+                text = status.ui().text
             )
             Text(
-                text = reward, style = CustomTypo.headlineLarge
+                text = reward, style = MeokQTheme.typography.Heading03
             )
             Text(
-                text = missionDescription, style = CustomTypo.labelMedium.copy(
-                    color = Gray300
+                text = missionDescription, style = MeokQTheme.typography.Caption01.copy(
+                    color = MeokQTheme.colorScheme.gray300
                 )
             )
         }

@@ -1,30 +1,56 @@
 package com.meokq.presentation.model
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.meokq.presentation.theme.BackGround
-import com.meokq.presentation.theme.BadgeBlue
-import com.meokq.presentation.theme.BadgeGreen
-import com.meokq.presentation.theme.BadgeRed
-import com.meokq.presentation.theme.Blue
-import com.meokq.presentation.theme.Gray300
-import com.meokq.presentation.theme.Green
-import com.meokq.presentation.theme.Red
-import com.meokq.presentation.theme.TextBlack
+import com.meokq.presentation.theme.MeokQTheme
 
 enum class QuestStatus(
     val status: String,
-    val text: String,
-    val textColor: Color,
-    val backgroundColor: Color,
 ) {
-    PUBLISHED("published", "수락전", Gray300, BackGround),
-    PENDING("pending", "진행중", Blue, BadgeBlue),
-    REJECTED("rejected", "재도전", Red, BadgeRed),
-    APPROVED("approved", "완료", Green, BadgeGreen)
+    PUBLISHED("published"),
+    PENDING("pending"),
+    REJECTED("rejected"),
+    APPROVED("approved")
 }
+
 val questStatusMap = mapOf(
     "퀘스트" to QuestStatus.PUBLISHED,
     "진행중" to QuestStatus.PENDING,
     "재도전" to QuestStatus.REJECTED,
     "완료" to QuestStatus.APPROVED,
 )
+
+data class QuestStatusUI(val text: String, val textColor: Color, val backgroundColor: Color)
+
+@Composable
+fun QuestStatus.ui(): QuestStatusUI {
+    return when (this) {
+        QuestStatus.PUBLISHED -> {
+            QuestStatusUI(
+                "수락전",
+                MeokQTheme.colorScheme.gray300,
+                MeokQTheme.colorScheme.background
+            )
+        }
+
+        QuestStatus.PENDING -> {
+            QuestStatusUI(
+                "진행중",
+                MeokQTheme.colorScheme.blue,
+                MeokQTheme.colorScheme.badgeBlue
+            )
+        }
+
+        QuestStatus.REJECTED -> {
+            QuestStatusUI("재도전", MeokQTheme.colorScheme.red, MeokQTheme.colorScheme.badgeRed)
+        }
+
+        QuestStatus.APPROVED -> {
+            QuestStatusUI(
+                "완료",
+                MeokQTheme.colorScheme.green,
+                MeokQTheme.colorScheme.badgeGreen
+            )
+        }
+    }
+}
