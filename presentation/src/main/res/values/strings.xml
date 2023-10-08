@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="application_name">맛Q</string>
-    <string name="text_button_sign_in_kakao">Login with Kakao</string>
-    <string name="text_button_sign_in_google">Sign with Google</string>
+    <string name="text_button_sign_in_kakao">카카오로 로그인하기</string>
+    <string name="text_button_sign_in_google">Google로 로그인하기</string>
+    <string name="login_skip">로그인 없이 둘러보기</string>
+    <string name="store_mission_empty">현재 수락할 수 있는 퀘스트가 없습니다.</string>
+    <string name="coupon_tab_use">사용된 쿠폰</string>
+    <string name="coupon_tab_unuse">미사용된 쿠폰</string>
 </resources>

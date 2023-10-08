@@ -1,26 +1,41 @@
 package com.meokq.presentation.ui.nav
 
+import Badge01
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.meokq.presentation.theme.Gray200
+import com.meokq.presentation.theme.Gray400
 
 data class BottomNavigationItem(
-    val text: String, val icon: ImageVector
+    val text: String,
+    val selectIcon: Int,
+    val unSelectIcon: Int
 )
+
 @Composable
 fun BottomNavigationBar(
     selectedItemPosition: Int = 0,
@@ -48,23 +63,22 @@ fun BottomNavigationItem(
     item: BottomNavigationItem,
     onClick: () -> Unit,
 ) {
-    val selectedIconColor = animateColorAsState(
-        targetValue = if (isSelected) Color.Black else Color.LightGray,
-        animationSpec = tween(300, 0, LinearEasing), label = ""
-    )
 
-    val selectedIconScale by animateFloatAsState(
-        if (isSelected) 1.1f else 1f, label = "", animationSpec = tween(100, 0, LinearEasing)
-    )
-
-    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
-        IconButton(modifier = Modifier.size(64.dp), onClick = onClick) {
-            Icon(
-                modifier = Modifier.scale(selectedIconScale),
-                imageVector = item.icon,
-                contentDescription = item.text,
-                tint = selectedIconColor.value
-            )
-        }
+    Column(
+        modifier
+            .clickable(onClick = onClick)
+            .padding(top = 19.dp, bottom = 32.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Image(
+            modifier = Modifier.width(24.dp),
+            painter = painterResource(id = if (isSelected) item.selectIcon else item.unSelectIcon),
+            contentDescription = item.text,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = item.text,
+            style = Badge01.copy(color = if (isSelected) Gray400 else Gray200)
+        )
     }
 }
