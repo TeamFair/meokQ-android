@@ -7,4 +7,11 @@
     <string name="store_mission_empty">현재 수락할 수 있는 퀘스트가 없습니다.</string>
     <string name="coupon_tab_use">사용된 쿠폰</string>
     <string name="coupon_tab_unuse">미사용된 쿠폰</string>
+    <string name="setting_menu_notice">공지사항</string>
+    <string name="setting_menu_customer">고객센터</string>
+    <string name="setting_menu_policy">약관 및 정책</string>
+    <string name="setting_menu_version">현재 버전 v 1.0</string>
+    <string name="setting_menu_logout">로그아웃</string>
+    <string name="setting_menu_signout">회원탈퇴</string>
+
 </resources>
